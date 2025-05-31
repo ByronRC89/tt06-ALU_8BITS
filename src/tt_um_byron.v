@@ -3,7 +3,10 @@ module tt_um_byron (
     output [7:0] io_out,
     input clk,
     input ena,
-    input rst_n
+    input rst_n,
+    input  [7:0] ui_in,
+    output [7:0] uo_out,
+    output [7:0] uo_oe
 );
 
     // Mapeo sin solapamiento:
