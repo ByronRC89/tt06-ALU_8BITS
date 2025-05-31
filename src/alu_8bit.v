@@ -1,7 +1,7 @@
 module alu_8bit (
     input [7:0] A,
     input [7:0] B,
-    input [2:0] sel,
+    input [9:8] sel,
     output reg [7:0] Result,
     output reg Cout
 );
