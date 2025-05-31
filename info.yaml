@@ -23,9 +23,9 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-   io_in:  "Entradas A, B, y selector de operación"
-  io_out: "Resultado de ALU"
-  clk:    "Clock del sistema"
+  io_in:  "Entradas_A_B_y_selector_de_operación"
+  io_out: "Resultado_de_ALU"
+  clk:    "Clock_del_sistema"
   ena:    ""
   rst_n:  ""
 
