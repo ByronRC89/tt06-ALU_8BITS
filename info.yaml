@@ -24,7 +24,6 @@ project:
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
-
 ui[0]: "[7:0]sw"
 ui[1]: "btn0"
 ui[2]: "btn1"
