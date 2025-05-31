@@ -1,4 +1,4 @@
-module tt_user_module (
+module user_module (
     input  [7:0] io_in,
     output [7:0] io_out
 );
