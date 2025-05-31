@@ -1,4 +1,4 @@
-module tt_ByronRC89_user_module (
+module tt_um_byron (
     input  [7:0] io_in,
     output [7:0] io_out
 );
