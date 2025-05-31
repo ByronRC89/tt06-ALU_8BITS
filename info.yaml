@@ -1,8 +1,10 @@
+yaml_version: 6
+
 project:
   title: "ALU 8 bits con suma"
   author: "Byron"
   description: "ALU de 8 bits usando sumador Look-Ahead, implementada con interfaz io_in/io_out"
-   tiles: 1
+  tiles: 1
 
 top_module: "tt_um_byron"
 
@@ -19,7 +21,3 @@ pinout:
   rst_n:  ""
 
 clock_hz: 1000000
-
-
-# Do not change!
-yaml_version: 6
