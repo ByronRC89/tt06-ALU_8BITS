@@ -27,7 +27,7 @@ La ALU implementa las siguientes operaciones:
 
 - `src/user_module.v`: Módulo compatible con Tiny Tapeout
 - `src/alu_8bit.v`: ALU con operaciones aritmético-lógicas
-- `src/carry_lookahead_adder.v`: Sumador optimizado tipo look-ahead
+- `src/carry_lookahead_adder_8bit.v`: Sumador optimizado tipo look-ahead
 - `test/user_module_tb.v`: Testbench básico
 - `info.yaml`: Metadatos del proyecto
 - `user_project_wrapper.v`: Wrapper requerido por la plataforma
