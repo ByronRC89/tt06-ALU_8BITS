@@ -4,13 +4,13 @@ from cocotb.triggers import Timer
 
 @cocotb.test()
 async def test_basic_addition(dut):
-    # A = 1, B = 2, sel = 000 (suma)
-    A = 1
+    # sel = 000 (suma), A = 3, B = 2
+    sel = 0b000
+    A = 3
     B = 2
-    sel = 0b000  # suma
 
-    dut.io_in.value = (A << 4) | B  # A en bits 7:4, B en bits 3:0
-    dut.io_in.value = (dut.io_in.value & 0b11111000) | sel  # insertar sel en bits 2:0
+    # Codificar en io_in: [7:5]=sel, [4:2]=A, [1:0]=B
+    dut.io_in.value = (sel << 5) | (A << 2) | B
 
     await Timer(10, units='ns')
 
