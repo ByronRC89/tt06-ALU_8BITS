@@ -1,63 +1,56 @@
-# 🧠 ALU de 8 Bits con Carry Look-Ahead - Tiny Tapeout
+![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg)
 
-Este proyecto implementa una ALU (Unidad Aritmético Lógica) de 8 bits compatible con la plataforma [Tiny Tapeout](https://tinytapeout.com/). Permite realizar operaciones básicas como suma, resta, AND y OR usando un sumador optimizado tipo *carry look-ahead*.
+## Tiny Tapeout DFFRAM Example
 
----
+This project includes a 32x32 (1024 bits) DFFRAM macro with a single read/write port (1RW). 
 
-## 📦 Estructura del Proyecto
+The size of the example project is 2x3 tiles, and the DFFRAM macro takes roughly 60% of the available space, leaving plenty of space for custom logic.
 
-```
-.
-├── info.yaml                  # Información del proyecto (nombre, autor, descripción)
-├── visual.json                # Configuración visual del módulo para el visor 2D/3D
-├── user_project_wrapper.v     # Envoltorio necesario para la plataforma (puede ser vacío)
-├── src/
-│   ├── user_module.v          # Módulo principal conectado a io_in / io_out
-│   ├── alu_8bit.v             # ALU con 4 operaciones básicas
-│   └── carry_lookahead_adder_8bit.v # Sumador look-ahead de 8 bits
-├── test/
-│   └── user_module_tb.v       # Testbench funcional básico
-├── docs/
-│   └── README.md              # Documentación del diseño
-```
+## What is Tiny Tapeout?
 
----
+TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip.
 
-## ⚙️ Funcionamiento
+To learn more and get started, visit https://tinytapeout.com.
 
-### Entradas `io_in[7:0]`
-- `A[3:0]` = `io_in[7:4]`
-- `B[3:0]` = `io_in[3:0]`
-- `sel[2:0]` = `io_in[2:0]` (selección de operación)
+## Building the project locally
 
-### Salida `io_out[7:0]`
-- Resultado de la operación aritmético-lógica seleccionada
-
-### Operaciones implementadas
-
-| sel (3 bits) | Operación         |
-|--------------|-------------------|
-| 000          | A + B (suma)      |
-| 001          | A - B (resta)     |
-| 010          | A & B (AND)       |
-| 011          | A \| B (OR)        |
-| otro         | Resultado = 0     |
-
----
-
-## 🔧 Cómo simular
+1. Install [OpenLane 2 with nix](https://openlane2.readthedocs.io/en/latest/getting_started/nix_installation/index.html).
+   Set the `OPENLANE2_ROOT` environment variable to the path where you cloned the openlane2 repository.
+2. Clone tt-support-tools: `git clone -b tt06 https://github.com/TinyTapeout/tt-support-tools tt`
+3. Run the following command:
 
 ```bash
-# Simular con iverilog y ver salida
-iverilog -o alu_testbench src/*.v test/user_module_tb.v
-vvp alu_testbench
+rm -rf runs && nix-shell ${OPENLANE2_ROOT}/shell.nix --run "python build.py"
 ```
 
----
+The build.py script will create a runs directory and run the OpenLane flow. The results will be in the runs/wokwi directory.
 
-## 🧑 Autor
+When you run the build for the first time, nix will download all the dependencies. This can take a while, especially if you
+haven't configured nix to use binary caches. Once the dependencies are downloaded, the build should take up to ten minutes.
 
-**Byron Rosales**  
-Proyecto para fabricación de chip educativo en Tiny Tapeout.
+## Changing the position of the RAM32 macro
 
+You can change the position of the RAM32 macro in your design by editing `config.json` as follows:
+
+1. Set `MACROS.RAM32.instances.ram1.location` to the x/y coordinates you want the RAM32 to be placed at.
+2. Set `FP_PDN_VOFFSET` to the x coordinate of the RAM + 16.32 (so if the RAM is at 10, set `FP_PDN_VOFFSET` to 26.32).
+
+Note that PDN (power distribution network) stripes of your design must match the PDN stripes of the RAM32 macro. Therefore, you must keep 
+`FP_PDN_VPITCH` at the default value (153.6), and set `FP_PDN_VOFFSET` to the x coordinate of the RAM + 16.32 (as explained above).
+
+## Resources
+
+- [FAQ](https://tinytapeout.com/faq/)
+- [Digital design lessons](https://tinytapeout.com/digital_design/)
+- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
+- [Join the community](https://discord.gg/rPK2nSjxy8)
+
+## What next?
+
+- Submit your design to the next shuttle [on the website](https://tinytapeout.com/#submit-your-design). The closing date is **November 4th**.
+- Edit this [README](README.md) and explain your design, how it works, and how to test it.
+- Share your GDS on your social network of choice, tagging it #tinytapeout and linking Matt's profile:
+  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [matt-venn](https://www.linkedin.com/in/matt-venn/)
+  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
+  - Twitter [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) [@matthewvenn](https://twitter.com/matthewvenn)
 
