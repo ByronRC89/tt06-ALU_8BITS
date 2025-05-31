@@ -17,7 +17,7 @@ project:
   source_files:
     - "tt_um_byron.v"
     - "alu_8bit.v"
-    - "carry_lookahead_adder.v"
+    - "carry_lookahead_adder_8bit.v"
    
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
