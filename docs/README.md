@@ -31,6 +31,7 @@ La ALU implementa las siguientes operaciones:
 - `test/user_module_tb.v`: Testbench básico
 - `info.yaml`: Metadatos del proyecto
 - `user_project_wrapper.v`: Wrapper requerido por la plataforma
+- `visual.json`: 
 
 ## ✍ Autor
 
